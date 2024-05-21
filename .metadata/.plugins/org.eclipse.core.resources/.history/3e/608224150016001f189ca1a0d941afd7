@@ -1,0 +1,46 @@
+package br.com.itau.geradornotafiscal.model;
+
+import br.com.itau.geradornotafiscal.service.CalculaFrete;
+
+public enum Regiao implements CalculaFrete{
+    NORTE {
+    	@Override
+    	public double calcularFreteComPercentual(Regiao regiao, Pedido pedido) {
+    		// TODO Auto-generated method stub
+    		return  pedido.getValorFrete() * 1.08;
+    	}
+    },
+    NORDESTE{
+    	@Override
+    	public double calcularFreteComPercentual(Regiao regiao, Pedido pedido) {
+    		return  pedido.getValorFrete() * 1.085;
+    	}
+    },
+    CENTRO_OESTE{
+    	@Override
+    	public double calcularFreteComPercentual(Regiao regiao, Pedido pedido) {
+    		return  pedido.getValorFrete() * 1.07;
+    	}
+    },
+    SUDESTE{
+    	@Override
+    	public double calcularFreteComPercentual(Regiao regiao, Pedido pedido) {
+    		return pedido.getValorFrete() * 1.048;
+    	}
+
+		@Override
+		public double calcularFreteComPercentual(Regiao regiao) {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+    },
+    SUL{
+    	@Override
+    	public double calcularFreteComPercentual(Regiao regiao) {
+    		// TODO Auto-generated method stub
+    		return 0;
+    	}
+    };
+
+	
+}

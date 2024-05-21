@@ -1,0 +1,24 @@
+package br.com.itau.geradornotafiscal.model;
+
+import br.com.itau.geradornotafiscal.model.Endereco;
+import br.com.itau.geradornotafiscal.model.Finalidade;
+import br.com.itau.geradornotafiscal.model.Regiao;
+
+public class EnderecoTemplate {
+
+	
+	public Endereco template1() {
+		Endereco endereco =  Endereco.builder()
+				.finalidade(Finalidade.ENTREGA)
+				.regiao(Regiao.SUDESTE)
+				.logradouro("Av do estado")
+				.numero("5533")
+				.estado("SP")
+				.complemento("4 anndar b")
+				.cep("03105003")				
+				.build();
+		
+		return endereco;
+		
+	}
+}

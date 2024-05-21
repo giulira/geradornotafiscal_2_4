@@ -1,0 +1,27 @@
+package br.com.itau.geradornotafiscal.service.impl;
+
+import br.com.itau.geradornotafiscal.model.Pedido;
+
+public class CalculaAliquotaBasePessoaFisica extends CalculaAliquotaBase{
+
+	@Override
+	double calcularAlicotaProduto(Pedido pedido) {
+		double valorTotalItens = pedido.getValorTotalItens();
+		double aliquota;
+
+		if (valorTotalItens < 500) {
+			aliquota = 0;
+		} else if (valorTotalItens <= 2000) {
+			aliquota = 0.12;
+		} else if (valorTotalItens <= 3500) {
+			aliquota = 0.15;
+		} else {
+			aliquota = 0.17;
+		}
+		itemNotaFiscalList = calculadoraAliquotaProduto.calcularAliquota(pedido.getItens(), aliquota);
+
+	}
+	
+	
+
+}

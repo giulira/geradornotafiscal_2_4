@@ -1,0 +1,9 @@
+package br.com.itau.geradornotafiscal.service;
+
+import br.com.itau.geradornotafiscal.model.Pedido;
+import br.com.itau.geradornotafiscal.model.Regiao;
+
+public interface CalcularFrete {
+
+	public double calcularFreteComPercentual(Regiao regiao, Pedido pedido);
+}

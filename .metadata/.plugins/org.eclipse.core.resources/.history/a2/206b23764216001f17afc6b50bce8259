@@ -1,0 +1,14 @@
+package br.com.itau.geradornotafiscal.service;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+class EmitirNotaFiscalServiceTest {
+
+	@Test
+	void test() {
+		fail("Not yet implemented");
+	}
+
+}

@@ -1,0 +1,11 @@
+package br.com.itau.geradornotafiscal.service;
+
+public class CalcularAliquotaServiceTest {
+
+	private CalcularAliquotaBaseService calcularAliquotaBaseService;
+	
+	public void shouldCalcularAliquotaWithSuccess() {
+		
+	}
+	
+}

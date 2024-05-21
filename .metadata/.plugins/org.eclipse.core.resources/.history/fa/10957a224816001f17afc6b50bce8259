@@ -1,0 +1,63 @@
+package br.com.itau.geradornotafiscal.model;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.UUID;
+
+public class NotaFiscalTemplate {
+	
+	public NotaFiscal template1() {
+		NotaFiscal notaFiscal = NotaFiscal.builder()
+				.data(LocalDateTime.now())
+				.idNotaFiscal(UUID.randomUUID().toString())
+				.valorFrete(BigDecimal.valueOf(300))
+				.valorTotalItens(BigDecimal.valueOf(300))
+				.itens(null)
+				.build();
+		
+		return notaFiscal;
+	}
+
+}
+
+/*
+ {
+  "id_pedido": 1,
+  "data": "2022-05-01",
+  "valor_total_itens": 5840.0,
+  "valor_frete": 72.0,
+  "itens": [
+    {
+      "id_item": 1,
+      "descricao": "Monitor LCD SAMSUNG",
+      "valor_unitario": 730,
+      "quantidade": 8
+    }
+  ],
+  "destinatario": {
+    "nome": "John Doe",
+    "tipo_pessoa": "JURIDICA",
+    "regime_tributacao": "SIMPLES_NACIONAL",
+    "documentos": [
+      {
+        "tipo": "CNPJ",
+        "numero": "49695613000180"
+      }
+    ],
+    "enderecos": [
+      {
+        "logradouro": "Av do estado",
+        "numero": "5533",
+        "complemento": "4 anndar b",
+        "bairro": "Mooca",
+        "cidade": "São Paulo",
+        "estado": "SP",
+        "pais": "Brasil",
+        "cep": "03105003",
+        "finalidade": "ENTREGA",
+        "regiao": "SUDESTE"
+      }
+    ]
+  }
+}
+ */

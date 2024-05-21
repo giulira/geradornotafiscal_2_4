@@ -1,0 +1,6 @@
+INDEX VERSION 1.134+C:\giu\geradornotafiscal_2_4\.metadata\.plugins\org.eclipse.jdt.core
+4150479187.index
+1865797976.index
+2462971256.index
+3055807922.index
+1952269100.index

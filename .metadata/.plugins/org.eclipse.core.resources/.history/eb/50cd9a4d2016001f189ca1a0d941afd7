@@ -1,0 +1,48 @@
+package br.com.itau.calculadoratributos.template;
+
+import java.math.BigDecimal;
+import java.util.Arrays;
+
+import br.com.itau.geradornotafiscal.model.Destinatario;
+import br.com.itau.geradornotafiscal.model.Endereco;
+import br.com.itau.geradornotafiscal.model.Finalidade;
+import br.com.itau.geradornotafiscal.model.Pedido;
+import br.com.itau.geradornotafiscal.model.Regiao;
+
+public class PedidoTemplate {
+
+	public Pedido template1() {
+		Pedido pedido = Pedido.builder().valorFrete(BigDecimal.valueOf(400))
+				.valorTotalItens(BigDecimal.valueOf(100)).build();
+		
+		Endereco endereco =  Endereco.builder()
+				.finalidade(Finalidade.ENTREGA)
+				.regiao(Regiao.SUDESTE).build();
+		
+		Destinatario destinatario =Destinatario.builder().enderecos(Arrays.asList(endereco)).build();
+
+				
+		return pedido;
+	}
+}
+/*
+Pedido pedido = new Pedido();
+pedido.setValorTotalItens(BigDecimal.valueOf(400));
+pedido.setValorFrete(BigDecimal.valueOf(100));
+Destinatario destinatario = new Destinatario();
+destinatario.setTipoPessoa(TipoPessoa.FISICA);
+
+// Create and add Endereco to the Destinatario
+Endereco endereco = new Endereco();
+endereco.setFinalidade(Finalidade.ENTREGA);
+endereco.setRegiao(Regiao.SUDESTE);
+destinatario.setEnderecos(Arrays.asList(endereco));
+
+pedido.setDestinatario(destinatario);
+
+// Create and add items to the Pedido
+Item item = new Item();
+item.setValorUnitario(BigDecimal.valueOf(100));
+item.setQuantidade(4);
+pedido.setItens(Arrays.asList(item));
+*/

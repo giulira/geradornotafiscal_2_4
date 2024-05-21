@@ -1,0 +1,45 @@
+package br.com.itau.geradornotafiscal.service;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import br.com.itau.geradornotafiscal.model.NotaFiscal;
+import br.com.itau.geradornotafiscal.model.NotaFiscalTemplate;
+import br.com.itau.geradornotafiscal.model.PedidoTemplate;
+
+
+@SpringBootTest
+@ExtendWith(SpringExtension.class)
+class EmitirNotaFiscalServiceTest {
+
+	@InjectMocks
+	private EmitirNotaFiscalService emitirNotaFiscalService;	
+
+    @InjectMocks
+    PedidoTemplate pedidoTemplate; 
+    
+    @InjectMocks
+    NotaFiscalTemplate notaFiscalTemplate;
+    
+	 @BeforeEach
+	    public void setup() {
+	        MockitoAnnotations.openMocks(this);
+	    }
+
+
+	 public void shouldEmitirNotaFiscalWithSuccess() {
+		 NotaFiscal notaFiscal = emitirNotaFiscalService.emitirNotaFiscal(
+				 pedidoTemplate.template2(), 
+				 notaFiscalTemplate.template1().getValorFrete(), 
+				 notaFiscalTemplate.template1().getItens());
+		 assertNotNull(notaFiscal);
+		 assertEquals(notaFiscalTemplate, notaFiscal);
+	 }
+}

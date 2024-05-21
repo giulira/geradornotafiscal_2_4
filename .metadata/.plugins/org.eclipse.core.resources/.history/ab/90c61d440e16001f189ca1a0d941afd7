@@ -1,0 +1,63 @@
+package br.com.itau.geradornotafiscal.service;
+
+import java.math.BigDecimal;
+import java.util.List;
+
+import br.com.itau.geradornotafiscal.model.ItemNotaFiscal;
+import br.com.itau.geradornotafiscal.model.Pedido;
+
+public class CalcularAliquotaPJSimplesNacional extends CalcularAliquotaBase{
+
+	@Override
+	public List<ItemNotaFiscal> calcularAlicotaProduto(Pedido pedido) {
+		BigDecimal valorTotalItens = pedido.getValorTotalItens();
+		BigDecimal aliquota;
+
+		/*if (valorTotalItens < 1000) {
+			aliquota = 0.03;
+		} else if (valorTotalItens <= 2000) {
+			aliquota = 0.07;
+		} else if (valorTotalItens <= 5000) {
+			aliquota = 0.13;
+		} else {
+			aliquota = 0.19;
+		}*/
+		
+		if (valorTotalItens.compareTo(BigDecimal.valueOf(1001)) != 1) {
+			aliquota = BigDecimal.valueOf(0.03);
+		} else if (valorTotalItens.compareTo(BigDecimal.valueOf(2000)) != 1) {
+			aliquota = BigDecimal.valueOf(0.07);
+		} else if (valorTotalItens.compareTo(BigDecimal.valueOf(5000)) != 1)  {
+			aliquota = BigDecimal.valueOf(0.13);
+		} else {
+			aliquota = BigDecimal.valueOf(0.19);
+		}
+		return calcularAliquota(pedido.getItens(), aliquota);
+
+	}
+	
+	public static void main(String[] args) {
+		BigDecimal valorTotalItens = BigDecimal.valueOf(1001);
+		BigDecimal aliquota;
+
+		
+		if (valorTotalItens.compareTo(BigDecimal.valueOf(1001)) == -1) {
+			aliquota = BigDecimal.valueOf(0.03);
+		} else if (valorTotalItens.compareTo(BigDecimal.valueOf(2000)) == -1) {
+			aliquota = BigDecimal.valueOf(0.07);
+		} else if (valorTotalItens.compareTo(BigDecimal.valueOf(5000)) != 1)  {
+			aliquota = BigDecimal.valueOf(0.13);
+		} else {
+			aliquota = BigDecimal.valueOf(0.19);
+		}
+		
+		
+		System.out.println("============ valorTotalItens "+ valorTotalItens +" aliquota "+aliquota);
+		System.out.println(valorTotalItens.compareTo(BigDecimal.valueOf(1001)));
+		
+				
+	}
+
+}
+
+

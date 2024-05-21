@@ -1,0 +1,50 @@
+package br.com.itau.geradornotafiscal.controller;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+
+import br.com.itau.geradornotafiscal.model.template.NotaFiscalTemplate;
+import br.com.itau.geradornotafiscal.model.template.PedidoTemplate;
+import br.com.itau.geradornotafiscal.service.GeradorNotaFiscalService;
+import br.com.itau.geradornotafiscal.web.controller.GeradorNFController;
+
+//@SpringBootTest
+//@WebMvcTest(GeradorNFController.class)
+
+@SpringBootTest
+@ExtendWith(SpringExtension.class)
+@AutoConfigureMockMvc
+public class GeradorNFControllerTest {	
+
+    @Autowired
+    private GeradorNotaFiscalService geradorNotaFiscalService;
+    
+	@InjectMocks
+	private GeradorNFController controller;
+	
+	@InjectMocks
+	private NotaFiscalTemplate notaFiscalTemplate;
+	
+	@InjectMocks
+    private PedidoTemplate pedidoTemplate; 
+    
+	@Autowired
+	private MockMvc mock;
+
+	@Test
+	public void gerarNotaFiscalWithSuccess() throws Exception {
+		//Mockito.when(geradorNotaFiscalService.gerarNotaFiscal(pedidoTemplate.template1())).thenReturn(notaFiscalTemplate.template1());
+		mock.perform(post("/api/pedido/gerarNotaFiscal")).andExpect(MockMvcResultMatchers.status().isOk());
+		
+	}
+}
+

@@ -1,0 +1,15 @@
+package br.com.itau.calculadoratributos.template;
+
+import java.util.Arrays;
+
+import br.com.itau.geradornotafiscal.model.Destinatario;
+
+public class DestinatarioTemplate {
+	
+	public Destinatario template1(){
+		EnderecoTemplate enderecoTemplate = new EnderecoTemplate();
+		Destinatario destinatario = Destinatario.builder()
+				.enderecos(Arrays.asList(enderecoTemplate.template1())).build();
+		return destinatario;
+	}
+}

@@ -1,0 +1,33 @@
+package br.com.itau.geradornotafiscal.service;
+
+import java.math.BigDecimal;
+import java.util.List;
+
+import br.com.itau.geradornotafiscal.model.ItemNotaFiscal;
+import br.com.itau.geradornotafiscal.model.Pedido;
+
+public class CalcularAliquotaBasePessoaFisica extends CalcularAliquotaBase{
+
+	@Override
+	public List<ItemNotaFiscal> calcularAlicotaProduto(Pedido pedido){
+		BigDecimal valorTotalItens = pedido.getValorTotalItens();
+		BigDecimal aliquota;
+
+		if (valorTotalItens < 500) {
+			aliquota = 0;
+		} else if (valorTotalItens <= 2000) {
+			aliquota = 0.12;
+		} else if (valorTotalItens <= 3500) {
+			aliquota = 0.15;
+		} else {
+			aliquota = 0.17;
+		}
+		return  calcularAliquota(pedido.getItens(), aliquota);
+
+	}
+	
+	
+
+}
+
+

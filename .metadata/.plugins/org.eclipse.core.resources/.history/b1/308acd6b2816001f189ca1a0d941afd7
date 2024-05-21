@@ -1,0 +1,18 @@
+package br.com.itau.geradornotafiscal.model.template;
+
+import br.com.itau.geradornotafiscal.model.Endereco;
+import br.com.itau.geradornotafiscal.model.Finalidade;
+import br.com.itau.geradornotafiscal.model.Regiao;
+
+public class EnderecoTemplate {
+
+	
+	public Endereco template1() {
+		Endereco endereco =  Endereco.builder()
+				.finalidade(Finalidade.ENTREGA)
+				.regiao(Regiao.SUDESTE).build();
+		
+		return endereco;
+		
+	}
+}

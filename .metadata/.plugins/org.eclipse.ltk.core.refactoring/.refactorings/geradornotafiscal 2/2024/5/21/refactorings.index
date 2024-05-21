@@ -1,0 +1,44 @@
+1716134995681	Delete elements
+1716135006181	Rename package 'br.com.itau.geradornotafiscal.service.impl'
+1716135016792	Rename type 'GeradorNotaFiscalServiceImpl'
+1716135735146	Delete elements
+1716135754147	Delete element
+1716137647097	Rename type 'CalculaFrete'
+1716137660273	Rename type 'CalculaAliquotaBase'
+1716137672567	Rename type 'CalculaAliquotaPJSimplesNacional'
+1716137682261	Rename type 'CalculaAliquotaBasePessoaFisica'
+1716137691298	Rename type 'CalculaAliquotaPFLucroReal'
+1716137705746	Rename type 'CalculaAliquotaPJLucroPresumido'
+1716138500982	Rename type 'CalcularAliquotaPFLucroReal'
+1716139029705	Rename type 'EmiteNotaFiscal'
+1716149679371	Delete element
+1716149738372	Rename type 'GeradorNotaFiscalServiceImplTest'
+1716149925511	Rename package 'br.com.itau.calculadoratributos'
+1716150009760	Move compilation unit
+1716150024445	Move compilation unit
+1716150035451	Move compilation unit
+1716150056112	Move compilation unit
+1716154085741	Rename package 'br.com.itau.calculadoratributos.service'
+1716154110874	Rename package 'br.com.itau.calculadoratributos.template'
+1716154247549	Rename package 'br.com.itau.geradornotafiscal.template'
+1716154833497	Rename package 'br.com.itau.geradornotafiscal.model.template'
+1716156617647	Rename type 'EmitirNotaFiscal'
+1716156629084	Rename type 'CalcularAliquotaPJSimplesNacional'
+1716156641190	Rename type 'CalcularAliquotaPJLucroReal'
+1716156649226	Rename type 'CalcularAliquotaPJLucroPresumido'
+1716156656053	Rename type 'CalcularAliquotaBasePessoaFisica'
+1716156662750	Rename type 'CalcularAliquotaBase'
+1716156669298	Rename type 'CalcularAliquota'
+1716167438442	Rename type 'NotaFiscal'
+1716169168133	Delete element
+1716169193328	Rename type 'EmiteNotaFiscalServiceTest'
+1716170699699	Rename type 'CalcularAliquotaServiceTest'
+1716215257912	Rename type 'CalcularAliquotaBasePessoaFisicaService'
+1716216651318	Rename type 'CalcularAliquotaPJLucroRealTest'
+1716216666123	Rename type 'CalcularAliquotaPJLucroPresumidoTest'
+1716217642879	Rename type 'CalcularFrete'
+1716225236792	Rename package 'br.com.itau.geradornotafiscal.model'
+1716225335591	Rename type 'CalcularAliquotaService'
+1716225401252	Delete element
+1716227851954	Move compilation unit
+1716245932451	Rename type 'EmitirNotaFiscalService'

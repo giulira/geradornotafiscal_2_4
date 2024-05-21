@@ -1,0 +1,38 @@
+package br.com.itau.geradornotafiscal.model;
+
+import static org.junit.Assert.assertNotNull;
+
+import java.math.BigDecimal;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import br.com.itau.geradornotafiscal.service.CalcularFreteService;
+
+@SpringBootTest
+@ExtendWith(SpringExtension.class)
+public class CalcularFreteServiceTest {	
+
+    @InjectMocks
+    private PedidoTemplate pedidoTemplate; 
+        
+    @Mock
+    private Regiao regiao;
+    
+    @Mock
+    private CalcularFreteService calcularFrete; 
+    
+    @Test
+    public void calculaFreteRegiaoSulWithSuccess() {
+    	Regiao regiaoSul = Regiao.SUL;
+    	BigDecimal valorFrete = calcularFrete.calcularFreteComPercentual(regiaoSul, pedidoTemplate.template1());
+    	//BigDecimal valorFrete= regiao.calcularFreteComPercentual(regiaoSul, pedidoTemplate.template1());
+    	
+    	assertNotNull(valorFrete);
+    }
+
+}

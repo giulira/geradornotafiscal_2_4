@@ -1,0 +1,13 @@
+package br.com.itau.calculadoratributos.template;
+
+import br.com.itau.geradornotafiscal.model.Item;
+
+public class ItemTemplate {
+
+	public Item template1() {
+		Item item = Item.builder()
+				.valorUnitario(100)
+				.quantidade(4)
+		return item;
+	}
+}

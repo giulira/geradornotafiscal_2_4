@@ -1,0 +1,32 @@
+package br.com.itau.geradornotafiscal.service;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import br.com.itau.geradornotafiscal.model.PedidoTemplate;
+
+
+@SpringBootTest
+@ExtendWith(SpringExtension.class)
+class EmitirNotaFiscalServiceTest {
+
+	@InjectMocks
+	private EmitirNotaFiscalService emitirNotaFiscalService;	
+
+    @InjectMocks
+    PedidoTemplate pedidoTemplate; 
+    
+	 @BeforeEach
+	    public void setup() {
+	        MockitoAnnotations.openMocks(this);
+	    }
+
+
+	 public void shouldEmitirNotaFiscalWithSuccess() {
+		 emitirNotaFiscalService.emitirNotaFiscal(pedidoTemplate.template2(), pedidoTemplate.template2().getValorFrete() ,pedidoTemplate.template2().getItens())
+	 }
+}

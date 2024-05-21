@@ -1,0 +1,29 @@
+package br.com.itau.geradornotafiscal.service;
+
+import java.util.List;
+
+import br.com.itau.geradornotafiscal.model.ItemNotaFiscal;
+import br.com.itau.geradornotafiscal.model.Pedido;
+
+public class CalculaAliquotaPJLucroPresumido extends CalculaAliquotaBase{
+
+	@Override
+	public List<ItemNotaFiscal> calcularAlicotaProduto(Pedido pedido) {
+		
+		double valorTotalItens = pedido.getValorTotalItens();
+		double aliquota;
+
+		if (valorTotalItens < 1000) {
+			aliquota = 0.03;
+		} else if (valorTotalItens <= 2000) {
+			aliquota = 0.09;
+		} else if (valorTotalItens <= 5000) {
+			aliquota = 0.15;
+		} else {
+			aliquota = 0.20;
+		}
+		return calcularAliquota(pedido.getItens(),aliquota);
+		
+	}
+
+}

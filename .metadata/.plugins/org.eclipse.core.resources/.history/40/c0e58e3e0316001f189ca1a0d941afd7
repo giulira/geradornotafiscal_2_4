@@ -1,0 +1,114 @@
+package br.com.itau.geradornotafiscal.service;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+import org.springframework.stereotype.Service;
+
+import br.com.itau.geradornotafiscal.model.Destinatario;
+import br.com.itau.geradornotafiscal.model.Endereco;
+import br.com.itau.geradornotafiscal.model.Finalidade;
+import br.com.itau.geradornotafiscal.model.ItemNotaFiscal;
+import br.com.itau.geradornotafiscal.model.NotaFiscal;
+import br.com.itau.geradornotafiscal.model.Pedido;
+import br.com.itau.geradornotafiscal.model.Regiao;
+import br.com.itau.geradornotafiscal.model.RegimeTributacaoPJ;
+import br.com.itau.geradornotafiscal.model.TipoPessoa;
+
+@Service
+public class GeradorNotaFiscalService{
+	
+	public NotaFiscal gerarNotaFiscal(Pedido pedido) {
+
+		Destinatario destinatario = pedido.getDestinatario();
+		TipoPessoa tipoPessoa = destinatario.getTipoPessoa();
+		List<ItemNotaFiscal> itemNotaFiscalList = new ArrayList<>();
+
+
+	//	CalculadoraAliquotaProduto calculadoraAliquotaProduto = new CalculadoraAliquotaProduto();
+
+		if (tipoPessoa == TipoPessoa.FISICA) {
+		
+			CalcularAliquotaBase calculoAliquotaBasePF = new CalcularAliquotaBasePessoaFisica();
+			itemNotaFiscalList = calculoAliquotaBasePF.calcularAlicotaProduto(pedido);
+			
+		} else if (tipoPessoa == TipoPessoa.JURIDICA) {
+
+			RegimeTributacaoPJ regimeTributacao = destinatario.getRegimeTributacao();
+
+			if (regimeTributacao == RegimeTributacaoPJ.SIMPLES_NACIONAL) {
+			
+				CalcularAliquotaBase calculoAliquotaBasePJSimplesNacional = new CalcularAliquotaPJSimplesNacional();
+				itemNotaFiscalList = calculoAliquotaBasePJSimplesNacional.calcularAlicotaProduto(pedido);
+				
+			} else if (regimeTributacao == RegimeTributacaoPJ.LUCRO_REAL) {
+								
+				CalcularAliquotaBase calculoAliquotaBasePJLucroReal = new CalcularAliquotaPJLucroReal();
+				itemNotaFiscalList = calculoAliquotaBasePJLucroReal.calcularAlicotaProduto(pedido);
+			
+			} else if (regimeTributacao == RegimeTributacaoPJ.LUCRO_PRESUMIDO) {
+							
+				CalcularAliquotaBase calculoAliquotaBasePJLucroPresumido = new CalcularAliquotaPJLucroPresumido();
+				itemNotaFiscalList = calculoAliquotaBasePJLucroPresumido.calcularAlicotaProduto(pedido);
+			
+		}
+		//Regras diferentes para frete
+
+		/*Regiao regiao = destinatario.getEnderecos().stream()
+				.filter(endereco -> endereco.getFinalidade() == Finalidade.ENTREGA || endereco.getFinalidade() == Finalidade.COBRANCA_ENTREGA)
+				.map(Endereco::getRegiao)
+				.findFirst()
+				.orElse(null);*/
+
+		Regiao regiao = buscarRegiao(pedido);
+		
+		/*double valorFrete = pedido.getValorFrete();
+		double valorFreteComPercentual =0;
+
+		if (regiao == Regiao.NORTE) {
+			valorFreteComPercentual = valorFrete * 1.08;
+		} else if (regiao == Regiao.NORDESTE) {
+			valorFreteComPercentual = valorFrete * 1.085;
+		} else if (regiao == Regiao.CENTRO_OESTE) {
+			valorFreteComPercentual = valorFrete * 1.07;
+		} else if (regiao == Regiao.SUDESTE) {
+			valorFreteComPercentual = valorFrete * 1.048;
+		} else if (regiao == Regiao.SUL) {
+			valorFreteComPercentual = valorFrete * 1.06;
+		}
+*/
+		
+		double valorFreteComPercentual = regiao.calcularFreteComPercentual(regiao, pedido);
+		
+		// Create the NotaFiscal object
+		String idNotaFiscal = UUID.randomUUID().toString();
+
+		NotaFiscal notaFiscal = NotaFiscal.builder()
+				.idNotaFiscal(idNotaFiscal)
+				.data(LocalDateTime.now())
+				.valorTotalItens(pedido.getValorTotalItens())
+				.valorFrete(valorFreteComPercentual)
+				.itens(itemNotaFiscalList)
+				.destinatario(pedido.getDestinatario())
+				.build();
+
+		new EstoqueService().enviarNotaFiscalParaBaixaEstoque(notaFiscal);
+		new RegistroService().registrarNotaFiscal(notaFiscal);
+		new EntregaService().agendarEntrega(notaFiscal);
+		new FinanceiroService().enviarNotaFiscalParaContasReceber(notaFiscal);
+
+		return notaFiscal;
+	}
+	
+	private Regiao buscarRegiao(Pedido pedido) {
+		Regiao regiao = pedido.getDestinatario().getEnderecos().stream()
+				.filter(endereco -> endereco.getFinalidade() == Finalidade.ENTREGA || endereco.getFinalidade() == Finalidade.COBRANCA_ENTREGA)
+				.map(Endereco::getRegiao)
+				.findFirst()
+				.orElse(null);
+		
+		return regiao;
+	}
+}

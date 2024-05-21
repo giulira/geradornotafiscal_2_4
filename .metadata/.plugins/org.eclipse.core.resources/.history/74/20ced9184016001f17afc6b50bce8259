@@ -1,0 +1,12 @@
+package br.com.itau.geradornotafiscal.model;
+
+public class DocumentoTemplate {
+	
+	public Documento template1() {
+		return Documento.builder()
+				.numero("88740347095")
+				.tipo(TipoDocumento.CPF)
+				.build();
+	}
+
+}

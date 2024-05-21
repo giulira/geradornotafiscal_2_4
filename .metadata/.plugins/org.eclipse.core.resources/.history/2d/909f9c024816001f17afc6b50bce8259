@@ -1,0 +1,14 @@
+package br.com.itau.geradornotafiscal.model;
+
+import java.math.BigDecimal;
+
+public class ItemNotaFiscalTemplate {
+
+	public ItemNotaFiscal template1() {
+		ItemNotaFiscal item = ItemNotaFiscal.builder()
+				.idItem("1")
+				.descricao("Teclado USB")				
+				.valorUnitario(BigDecimal.valueOf(50))
+				.quantidade(2).build();
+	}
+}

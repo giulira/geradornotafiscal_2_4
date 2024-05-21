@@ -1,0 +1,5 @@
+package br.com.itau.geradornotafiscal.model;
+
+public class NotaFiscal {
+
+}
